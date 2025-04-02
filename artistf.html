@@ -1,0 +1,17 @@
+<!-- served at / -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Add to Playlist</title>
+</head>
+<body>
+  <h1>Add a Song to Your Playlist</h1>
+  <form method="POST" action="/submit">
+    <label>Playlist Name: <input type="text" name="playlist_name" required /></label><br />
+    <label>Song Name: <input type="text" name="song_name" required /></label><br />
+    <label>Song URL: <input type="url" name="song_url" required /></label><br />
+    <button type="submit">Add to Playlist</button>
+  </form>
+</body>
+</html>

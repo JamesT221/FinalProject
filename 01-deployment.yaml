@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: request-counter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: request-counter
+  template:
+    metadata:
+      labels:
+        app: request-counter
+    spec:
+      volumes:
+        - name: counter-volume
+          emptyDir: {}
+      containers:
+        - name: flask-app
+          image: gcr.io/YOUR_PROJECT_ID/request-counter:latest
+          ports:
+            - containerPort: 5000
+          volumeMounts:
+            - mountPath: /data
+              name: counter-volume
+        - name: reset-cron
+          image: busybox
+          command: ["/bin/sh", "-c", "while true; do sleep 60; echo 0 > /data/requests.txt; done"]
+          volumeMounts:
+            - mountPath: /data
+              name: counter-volume
